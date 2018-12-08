@@ -1,0 +1,14 @@
+[Unit]
+Description=Load wifi module
+Conflicts=shutdown.target actdead.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/sbin/modprobe bcmdhd firmware_path=/system/vendor/firmware/brcm/fw_bcmdhd_4356a2_pcie.bin nvram_path=/system/vendor/firmware/brcm/nvram_pcie_4356_a2.cal
+ExecStop=/sbin/modprobe -r bcmdhd
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
